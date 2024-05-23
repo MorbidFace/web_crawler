@@ -1,9 +1,9 @@
 import { argv } from "node:process";
-import { crawlPage } from "./crawl";
+import { crawlPage } from "./crawl.js";
 
 // console.log(argv[2])
 
-function main() {
+async function main() {
   if (argv.length < 3) {
     console.log("Need to specify a url as an argument.");
     return;
@@ -14,7 +14,9 @@ function main() {
 
   const baseUrl = argv[2];
   console.log(`Crawling at the base: ${baseUrl}...`);
-  crawlPage(baseUrl);
+  const pages = await crawlPage(baseUrl);
+  console.log(pages)
+  return
 }
 
-main();
+await main();
